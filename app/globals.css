@@ -1,26 +1,92 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Rain drop falling animation ─────────────────────────────── */
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-10%) rotate(15deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(15deg);
+    opacity: 0;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.rain-drop {
+  animation: rain-fall linear infinite;
+}
+
+/* ── Snowflake falling animation ─────────────────────────────── */
+@keyframes snow-fall {
+  0% {
+    transform: translateY(-20px) translateX(0px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--drift, 20px));
+    opacity: 0;
+  }
+}
+
+.snow-flake {
+  animation: snow-fall ease-in-out infinite;
+}
+
+/* ── Fog drift animation ──────────────────────────────────────── */
+@keyframes fog-drift {
+  0% {
+    transform: translateX(-100%) scaleY(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(100%) scaleY(1.1);
+    opacity: 0;
+  }
+}
+
+.fog-layer {
+  animation: fog-drift 12s ease-in-out infinite;
+}
+
+.fog-layer-2 {
+  animation: fog-drift 18s ease-in-out 5s infinite;
+}
+
+/* ── Sun glow pulse ───────────────────────────────────────────── */
+@keyframes sun-pulse {
+  0%, 100% {
+    transform: translateY(-60px) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-60px) scale(1.15);
+    opacity: 0.9;
+  }
+}
+
+.sun-glow {
+  animation: sun-pulse 4s ease-in-out infinite;
+}
+
+/* ── Hide scrollbar ───────────────────────────────────────────── */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
